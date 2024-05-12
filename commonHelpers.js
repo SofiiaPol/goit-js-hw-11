@@ -4,10 +4,10 @@ import"./assets/vendor-9dabe76c.js";(function(){const t=document.createElement("
             <img
             class="gallery-image"
             src="${r.webformatURL}"
-            alt="cat"
+            alt="${tags}"
             />
         </a>
     </li>
 
-`).join("");document.querySelector(".ul").innerHTML=t},d=document.querySelector(".search-form"),h=s=>{s.preventDefault();const t=s.target;console.log(t.elements),console.log(t.elements.searchInput.value),m(t.elements.searchInput.value).then(r=>{f(r.hits)}).catch(r=>{console.log(r)})};d.addEventListener("submit",h);
+`).join("");new SimpleLightbox(".ul a",{}),document.querySelector(".ul").innerHTML=t},d=document.querySelector(".search-form"),h=s=>{s.preventDefault();const t=s.target;console.log(t.elements),console.log(t.elements.searchInput.value),m(t.elements.searchInput.value).then(r=>{f(r.hits)}).catch(r=>{console.log(r)})};d.addEventListener("submit",h);
 //# sourceMappingURL=commonHelpers.js.map
