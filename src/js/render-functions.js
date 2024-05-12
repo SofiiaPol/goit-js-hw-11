@@ -7,7 +7,7 @@ export const renderImages = items => {
             <img
             class="gallery-image"
             src="${image.webformatURL}"
-            alt="cat"
+            alt="${tags}"
             />
         </a>
     </li>
@@ -15,5 +15,9 @@ export const renderImages = items => {
 `
     )
     .join('');
+  const lightbox = new SimpleLightbox('.ul a', {
+    // options
+  });
+
   document.querySelector('.ul').innerHTML = htmlString;
 };

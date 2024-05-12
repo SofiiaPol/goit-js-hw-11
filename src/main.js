@@ -25,6 +25,15 @@ const onFormSubmit = event => {
 
 searchForm.addEventListener('submit', onFormSubmit);
 
+function showError() {
+  if (fetchImages === '') {
+    iziToast.show({
+      title: 'Error',
+      message: `Sorry, there are no images matching your search query. Please try again!`,
+    });
+  }
+}
+
 // if (submitButton === ' ') {
 //   submitButton.setAttribute('disabled');
 // }
