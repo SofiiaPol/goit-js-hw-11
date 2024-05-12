@@ -1,4 +1,4 @@
-export const renderImages = (items, ulElement) => {
+export const renderImages = items => {
   const htmlString = items
     .map(
       image => `
@@ -15,5 +15,5 @@ export const renderImages = (items, ulElement) => {
 `
     )
     .join('');
-  ulElement.innerHTML = htmlString;
+  document.querySelector('.ul').innerHTML = htmlString;
 };

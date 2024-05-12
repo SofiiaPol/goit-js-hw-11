@@ -1,5 +1,5 @@
 const BASE_URL = 'https://pixabay.com';
-const PATH = '/api';
+const PATH = '/api/';
 const PARAMS = {
   key: '43828991-79d1a60f3e87126db3a63842a',
   imageType: 'photo',

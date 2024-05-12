@@ -7,20 +7,27 @@ import 'izitoast/dist/css/iziToast.min.css';
 import { fetchImages } from './js/pixabay-api';
 import { renderImages } from './js/render-functions';
 
-const ul = document.querySelector('.ul');
-const submitButton = document.querySelector('.submit-button');
+const searchForm = document.querySelector('.search-form');
 
-submitButton.addEventListener('click', event => {
+const onFormSubmit = event => {
   event.preventDefault();
-  fetchImages('flower')
+  const form = event.target;
+  console.log(form.elements);
+  console.log(form.elements.searchInput.value);
+  fetchImages(form.elements.searchInput.value)
     .then(data => {
-      renderImages(data.hits, ul);
+      renderImages(data.hits);
     })
     .catch(error => {
       console.log(error);
     });
-});
+};
 
+searchForm.addEventListener('submit', onFormSubmit);
+
+// if (submitButton === ' ') {
+//   submitButton.setAttribute('disabled');
+// }
 // fetchImages('flower')
 //   .then(data => {
 //     // console.log(data);
