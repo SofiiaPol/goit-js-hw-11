@@ -5,37 +5,22 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 import { fetchImages } from './js/pixabay-api';
+import { renderImages } from './js/render-functions';
 
 const ul = document.querySelector('.ul');
 const submitButton = document.querySelector('.submit-button');
 
-submitButton.addEventListener('click', submitButton => {
+submitButton.addEventListener('click', event => {
+  event.preventDefault();
   fetchImages('flower')
     .then(data => {
-      // console.log(data);
-      // return data;
-      const items = data.hits
-        .map(
-          image => `
-    <li class="gallery-item">
-        <a class="gallery-link" href="${image.webformatURL}">
-            <img
-            class="gallery-image"
-            src="${image.webformatURL}"
-            alt="cat"
-            />
-        </a>
-    </li>
-
-`
-        )
-        .join('');
-      ul.innerHTML = items;
+      renderImages(data.hits, ul);
     })
     .catch(error => {
-      console.log(error.message);
+      console.log(error);
     });
 });
+
 // fetchImages('flower')
 //   .then(data => {
 //     // console.log(data);
