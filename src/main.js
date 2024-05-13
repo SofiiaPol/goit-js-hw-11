@@ -6,9 +6,11 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 import { fetchImages } from './js/pixabay-api';
 import { renderImages } from './js/render-functions';
+import simpleLightbox from 'simplelightbox';
 
 const searchForm = document.querySelector('.search-form');
 
+let lightbox;
 const onFormSubmit = event => {
   event.preventDefault();
   const form = event.target;
@@ -16,23 +18,41 @@ const onFormSubmit = event => {
   console.log(form.elements.searchInput.value);
   fetchImages(form.elements.searchInput.value)
     .then(data => {
-      renderImages(data.hits);
+      if (data.totalHits === 0) {
+        showMessage(
+          `Sorry, there are no images matching your search query. Please try again!`
+        );
+      } else {
+        renderImages(data.hits);
+        lightbox = new SimpleLightbox('.gallery a');
+      }
     })
     .catch(error => {
-      console.log(error);
+      showError(error.message);
     });
 };
 
 searchForm.addEventListener('submit', onFormSubmit);
 
-function showError() {
-  if (fetchImages === '') {
-    iziToast.show({
-      title: 'Error',
-      message: `Sorry, there are no images matching your search query. Please try again!`,
-    });
-  }
+function showError(errorMessage) {
+  iziToast.show({
+    title: 'Error',
+    message: errorMessage,
+    messageColor: 'white',
+    backgroundColor: 'tomato',
+  });
 }
+
+function showMessage(message) {
+  iziToast.show({
+    title: 'Message',
+    message: message,
+    messageColor: 'white',
+    backgroundColor: 'teal',
+  });
+}
+
+// `Sorry, there are no images matching your search query. Please try again!`;
 
 // if (submitButton === ' ') {
 //   submitButton.setAttribute('disabled');

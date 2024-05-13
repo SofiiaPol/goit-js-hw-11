@@ -3,11 +3,11 @@ export const renderImages = items => {
     .map(
       image => `
     <li class="gallery-item">
-        <a class="gallery-link" href="${image.webformatURL}">
+        <a class="gallery-link" href="${image.largeImageURL}">
             <img
             class="gallery-image"
             src="${image.webformatURL}"
-            alt="${tags}"
+            alt="${image.tags}"
             />
         </a>
     </li>
@@ -15,9 +15,6 @@ export const renderImages = items => {
 `
     )
     .join('');
-  const lightbox = new SimpleLightbox('.ul a', {
-    // options
-  });
 
-  document.querySelector('.ul').innerHTML = htmlString;
+  document.querySelector('.gallery').innerHTML = htmlString;
 };
