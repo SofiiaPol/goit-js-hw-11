@@ -9,6 +9,10 @@ import { renderImages } from './js/render-functions';
 import simpleLightbox from 'simplelightbox';
 
 const searchForm = document.querySelector('.search-form');
+const loader = document.querySelector('.loader');
+
+loader.style.display = 'none';
+// searchForm.addEventListener('submit', onSearch);
 
 let lightbox;
 const onFormSubmit = event => {
@@ -18,6 +22,7 @@ const onFormSubmit = event => {
   console.log(form.elements.searchInput.value);
   fetchImages(form.elements.searchInput.value)
     .then(data => {
+      loader.style.display = 'none';
       if (data.totalHits === 0) {
         showMessage(
           `Sorry, there are no images matching your search query. Please try again!`
@@ -28,6 +33,7 @@ const onFormSubmit = event => {
       }
     })
     .catch(error => {
+      loader.style.display = 'none';
       showError(error.message);
     });
 };
@@ -51,6 +57,20 @@ function showMessage(message) {
     backgroundColor: 'teal',
   });
 }
+
+function onSearch(event) {
+  event.preventDefault();
+  // htmlString.innerHTML = '';
+  loader.style.display = 'block';
+}
+
+// function showLoader() {
+//   document.getElementById('loader').style.display = 'block';
+// }
+
+// function hideLoader() {
+//   document.getElementById('loader').style.display = 'none';
+// }
 
 // `Sorry, there are no images matching your search query. Please try again!`;
 
