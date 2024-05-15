@@ -12,9 +12,8 @@ const searchForm = document.querySelector('.search-form');
 const loader = document.querySelector('.loader');
 
 loader.style.display = 'none';
-// searchForm.addEventListener('submit', onSearch);
+let lightbox = new SimpleLightbox('.gallery a');
 
-let lightbox;
 const onFormSubmit = event => {
   event.preventDefault();
   const form = event.target;
@@ -29,7 +28,7 @@ const onFormSubmit = event => {
         );
       } else {
         renderImages(data.hits);
-        lightbox = new SimpleLightbox('.gallery a');
+        lightbox.refresh();
       }
     })
     .catch(error => {
@@ -60,49 +59,5 @@ function showMessage(message) {
 
 function onSearch(event) {
   event.preventDefault();
-  // htmlString.innerHTML = '';
   loader.style.display = 'block';
 }
-
-// function showLoader() {
-//   document.getElementById('loader').style.display = 'block';
-// }
-
-// function hideLoader() {
-//   document.getElementById('loader').style.display = 'none';
-// }
-
-// `Sorry, there are no images matching your search query. Please try again!`;
-
-// if (submitButton === ' ') {
-//   submitButton.setAttribute('disabled');
-// }
-// fetchImages('flower')
-//   .then(data => {
-//     // console.log(data);
-//     // return data;
-//     const items = data.hits
-//       .map(
-//         image => `
-//     <li class="gallery-item">
-//         <a class="gallery-link" href="${image.webformatURL}">
-//             <img
-//             class="gallery-image"
-//             src="${image.webformatURL}"
-//             alt="cat"
-//             />
-//         </a>
-//     </li>
-
-// `
-//       )
-//       .join('');
-//     ul.innerHTML = items;
-//   })
-//   .catch(error => {
-//     console.log(error.message);
-//   });
-// console.log('data', data);
-
-// import { fetchImages } from './pixabay-api.js';
-// import { renderSearchForm } from './render-functions.js';
