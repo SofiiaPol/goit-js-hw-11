@@ -6,16 +6,15 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 import { fetchImages } from './js/pixabay-api';
 import { renderImages } from './js/render-functions';
-import simpleLightbox from 'simplelightbox';
 
 const searchForm = document.querySelector('.search-form');
 const loader = document.querySelector('.loader');
 
-loader.style.display = 'none';
 let lightbox = new SimpleLightbox('.gallery a');
 
 const onFormSubmit = event => {
   event.preventDefault();
+  updateLoader('block');
   const form = event.target;
   const userInput = form.elements.searchInput.value;
   if (userInput.trim() === '') {
@@ -24,7 +23,7 @@ const onFormSubmit = event => {
   }
   fetchImages(userInput)
     .then(data => {
-      loader.style.display = 'none';
+      updateLoader('none');
       if (data.totalHits === 0) {
         showMessage(
           `Sorry, there are no images matching your search query. Please try again!`
@@ -34,7 +33,7 @@ const onFormSubmit = event => {
       lightbox.refresh();
     })
     .catch(error => {
-      loader.style.display = 'none';
+      updateLoader('none');
       showError(error.message);
     });
 };
@@ -59,7 +58,6 @@ function showMessage(message) {
   });
 }
 
-function onSearch(event) {
-  event.preventDefault();
-  loader.style.display = 'block';
+function updateLoader(value) {
+  loader.style.display = value;
 }
